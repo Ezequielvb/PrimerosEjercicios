@@ -72,18 +72,6 @@ namespace PrimerosEjercicios
                     ejercicio10();
                     break;
             }
-            switch (ej)
-            {
-                case 11:
-                    ejercicio11();
-                    break;
-            }
-            switch (ej)
-            {
-                case 12:
-                    ejercicio12();
-                    break;
-            }
 
         }
 
