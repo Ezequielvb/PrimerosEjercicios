@@ -12,7 +12,8 @@ namespace PrimerosEjercicios
         {
             Console.WriteLine("¿Que ejercicio quieres hacer?");
             int ej = int.Parse(Console.ReadLine());
-            switch (ej) {
+            switch (ej)
+            {
                 case 1:
                     ejercicio1();
                     break;
@@ -244,7 +245,7 @@ namespace PrimerosEjercicios
         {
             return usuario == "usuario2DAM" && contrasena == "pass2DAM";
         }
-    
+
         static void ejercicio7()
         {
             Console.Write("Introduce el primer número: ");
@@ -265,13 +266,13 @@ namespace PrimerosEjercicios
             {
                 Console.WriteLine("Ninguno de los dos números es múltiplo del otro.");
             }
-        
 
-        bool EsMultiplo(int a, int b)
-        {
-            if (b == 0) return false;
-            return a % b == 0;
-        }
+
+            bool EsMultiplo(int a, int b)
+            {
+                if (b == 0) return false;
+                return a % b == 0;
+            }
         }
         static void ejercicio8()
         {
@@ -282,7 +283,8 @@ namespace PrimerosEjercicios
             int sumarnum(int num)
             {
                 int suma = 0;
-                while (num > 0){
+                while (num > 0)
+                {
                     suma += num % 10;
                     num = num / 10;
                 }
@@ -291,19 +293,111 @@ namespace PrimerosEjercicios
         }
         static void ejercicio9()
         {
-            Array
+
+
+            int[] numeros = { 5, 2, 7, 4, 5, 9 };
+            int posicionMenor = ObtenerPosicionMenor(numeros);
+            Console.WriteLine($"La posición del número menor es: {posicionMenor}");
         }
+
+        static int ObtenerPosicionMenor(int[] array)
+        {
+            int menor = array[0];
+            int posicion = 0;
+
+            for (int i = 1; i < array.Length; i++)
+            {
+                if (array[i] < menor)
+                {
+                    menor = array[i];
+                    posicion = i;
+                }
+            }
+
+            return posicion;
+        }
+
         static void ejercicio10()
         {
-
+            Banco banco = new Banco();
+            banco.Operar();
+            banco.ObtenerEstado();
         }
-        static void ejercicio11()
+        public class Cliente
         {
+            private string nombre;
+            private double cantidadTotal;
 
+            public Cliente(string nombre)
+            {
+                this.nombre = nombre;
+                this.cantidadTotal = 0;
+            }
+
+            public void Ingresar(double cantidad)
+            {
+                cantidadTotal += cantidad;
+            }
+
+            public void Sacar(double cantidad)
+            {
+                if (cantidad <= cantidadTotal)
+                {
+                    cantidadTotal -= cantidad;
+                }
+                else
+                {
+                    Console.WriteLine($"{nombre} no tiene suficiente saldo para retirar {cantidad}");
+                }
+            }
+
+            public double GetCantidadTotal()
+            {
+                return cantidadTotal;
+            }
+
+            public void MostrarInformacion()
+            {
+                Console.WriteLine($"Cliente: {nombre} | Saldo actual: {cantidadTotal} €");
+            }
         }
-        static void ejercicio12()
+        public class Banco
         {
+            private Cliente cliente1;
+            private Cliente cliente2;
+            private Cliente cliente3;
 
+            public Banco()
+            {
+                cliente1 = new Cliente("Ana");
+                cliente2 = new Cliente("Luis");
+                cliente3 = new Cliente("María");
+            }
+
+            public void Operar()
+            {
+                cliente1.Ingresar(1000);
+                cliente2.Ingresar(1500);
+                cliente3.Ingresar(2000);
+
+                cliente1.Sacar(200);
+                cliente2.Sacar(300);
+                cliente3.Sacar(500);
+            }
+
+            public void ObtenerEstado()
+            {
+                double totalBanco = cliente1.GetCantidadTotal() +
+                                    cliente2.GetCantidadTotal() +
+                                    cliente3.GetCantidadTotal();
+
+                Console.WriteLine($"Dinero total del banco: {totalBanco} €");
+
+                cliente1.MostrarInformacion();
+                cliente2.MostrarInformacion();
+                cliente3.MostrarInformacion();
+            }
         }
+
     }
 }
